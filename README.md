@@ -1,24 +1,75 @@
-# Installments API
+# Money Tracker
 
-A Django REST API for tracking installment payments with JWT authentication.
+Full-stack application for tracking installment payments with JWT authentication.
+
+## Project Structure
+
+```
+money_tracker/
+├── backend/                 # Django REST API
+│   ├── config/             # Django project settings
+│   ├── core/               # Shared authentication & utilities
+│   ├── installments/       # Installments app
+│   │   ├── services/       # Business logic
+│   │   ├── utils/          # App-specific utilities
+│   │   └── constants/      # App-specific constants
+│   ├── manage.py
+│   ├── requirements.txt
+│   └── README.md
+├── frontend/               # Next.js frontend
+│   ├── src/
+│   │   ├── app/           # Next.js app router
+│   │   ├── components/    # Reusable UI components
+│   │   ├── lib/          # Utility functions, API clients
+│   │   ├── hooks/        # Custom React hooks
+│   │   └── types/        # TypeScript types
+│   └── README.md
+├── docker-compose.yml
+└── README.md
+```
 
 ## Features
 
 - JWT authentication with cookie-based tokens
 - Track installment payments with calculated fields:
-  - [total_paid](cci:1://file:///Users/mjpro/Desktop/projects/installments/installments/models.py:12:4-20:24) - Amount paid to date
-  - [remaining_amount](cci:1://file:///Users/mjpro/Desktop/projects/installments/installments/models.py:11:4-13:49) - Balance remaining
-  - [remaining_months](cci:1://file:///Users/mjpro/Desktop/projects/installments/installments/models.py:8:4-10:80) - Months left to pay
-  - [last_payment_date](cci:1://file:///Users/mjpro/Desktop/projects/installments/installments/models.py:18:4-20:62) - Final payment date
-  - [progress_percentage](cci:1://file:///Users/mjpro/Desktop/projects/installments/installments/models.py:22:4-24:64) - Payment progress
-  - [is_paid](cci:1://file:///Users/mjpro/Desktop/projects/installments/installments/models.py:26:4-28:50) - Payment completion status
+  - Total paid to date
+  - Remaining balance
+  - Months left to pay
+  - Final payment date
+  - Payment progress percentage
+  - Payment completion status
 - User-specific data isolation
 - CORS enabled for frontend integration
 
-## Setup
+## Quick Start
 
-1. Clone the repository
-2. Create virtual environment:
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+### Using Docker Compose (Recommended)
+
+```bash
+docker-compose up
+```
+
+### Manual Setup
+
+**Backend:**
+```bash
+cd backend
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
+```
+
+**Frontend:**
+```bash
+cd frontend
+npm install
+cp .env.example .env.local
+npm run dev
+```
+
+## Documentation
+
+- [Backend README](./backend/README.md)
+- [Frontend README](./frontend/README.md)
